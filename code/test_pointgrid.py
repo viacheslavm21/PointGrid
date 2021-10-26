@@ -1,7 +1,6 @@
 from io import StringIO
 import sys
 import unittest
-from unittest.mock import patch
 import numpy as np
 from network import *
 import tensorflow as tf
@@ -30,6 +29,38 @@ class Test_Network(unittest.TestCase):
         integer_label = np.zeros((2,3))
         with self.assertRaises(AssertionError):
             integer_label_to_one_hot_label(integer_label)
+            
+    def test_pc2voxel(self):
+        pc = np.array([[113.772   , 108.51    ,  16.5534  ],
+                       [113.775   ,  99.6067  ,   0.120465],
+                       [113.772   ,  99.3912  ,   0.240929],
+                       [113.772   , 108.51    ,  16.5534  ],
+                       [113.775   ,  99.6067  ,   0.120465],
+                       [113.772   ,  99.3912  ,   0.240929],
+                       [113.772   , 108.51    ,  16.5534  ],
+                       [113.775   ,  99.6067  ,   0.120465],
+                       [113.772   ,  99.3912  ,   0.240929],
+                       [113.772   , 108.51    ,  16.5534  ],
+                       [113.775   ,  99.6067  ,   0.120465],
+                       [113.772   ,  99.3912  ,   0.240929],
+                       [113.772   , 108.51    ,  16.5534  ],
+                       [113.775   ,  99.6067  ,   0.120465],
+                       [113.772   ,  99.3912  ,   0.240929],
+                       [113.772   , 108.51    ,  16.5534  ]])
+        pc_label = np.zeros((16, NUM_SEG_PART))
+        pc_label[:, 0] = 1
+        data, label, index = pc2voxel(pc, pc_label)
+        data_shape = np.array([N, N, N, 13])
+        label_shape = np.array([N, N, N, K+1, NUM_SEG_PART])
+        index_shape = np.array([N, N, N, K])
+
+        self.assertTrue(np.allclose(data_shape, data.shape, rtol=1e-05, atol=1e-08))
+        self.assertTrue(np.allclose(label_shape, label.shape, rtol=1e-05, atol=1e-08))
+        self.assertTrue(np.allclose(index_shape, index.shape, rtol=1e-05, atol=1e-08))
+        
+        # invalid input
+        with self.assertRaises(IndexError):
+            pc2voxel(pc[0], pc_label[0])
 
 
 

@@ -7,17 +7,18 @@ with open("README", 'r') as f:
     long_description = f.read()
 
 with open("requirements.txt") as f:
-    requirements = f.read()
+    requirements = [line.rstrip() for line in f.readlines()]
 
 if __name__ == "__main__":
     print("Building wheel {}-{}".format(name, version))
+    print ((requirements))
     setup(
         name=name,
-        version=version,
+        version=version
         description='Skoltech students contributed PointGrid project',
         author='FSE',
         author_email='A.Artemov@skoltech.ru',
         long_description=long_description,
         packages=[name],
-        install_requires=requirements, #external packages as dependencies
-)
+        install_requires=requirements #external packages as dependencies
+        )

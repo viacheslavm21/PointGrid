@@ -8,7 +8,7 @@ import tensorflow as tf
 import os
 from scipy.io import savemat
 
-class TestNetwork(unittest.TestCase):
+class Test_Network(unittest.TestCase):
 
     def test_leak_relu(self):
         x = 1.0
@@ -33,9 +33,9 @@ class TestNetwork(unittest.TestCase):
 
 
 
-class TestTrain(unittest.TestCase):
+class Test_Train_Test(unittest.TestCase):
     
-    def test_train_one_epoch_one_file(self):
+    def test_1train_one_epoch_one_file(self):
         os.system("mv ../data/ShapeNet/train ../data/ShapeNet/train_old")
         os.system("mkdir ../data/ShapeNet/train")
         randpoints = np.array([[113.772, 108.51, 16.5534], [113.775, 99.6067, 0.120465], [113.772, 99.3912, 0.240929],
@@ -51,12 +51,48 @@ class TestTrain(unittest.TestCase):
         os.system("python -W ignore train.py --epoch 1 --batch 1")
         os.system("rm -r ../data/ShapeNet/train")
         os.system("mv ../data/ShapeNet/train_old ../data/ShapeNet/train")
-        
-# class TestTest(unittest.TestCase):
     
-#     def test_test(self):
-
-#         os.system("python -W ignore test.py") 
+    def test_2test_with_categoryfile(self):
+        os.system("mv ../data/ShapeNet/test ../data/ShapeNet/test_old")
+        os.system("mv ../category_file ../category_file_old")
+        os.system("mkdir ../data/ShapeNet/test")
+        with open("../category_file", "w") as outfile:
+            outfile.write("\n".join(["first_category"]))
+        outfile.close()
+        randpoints = np.array([[113.772, 108.51, 16.5534], [113.775, 99.6067, 0.120465], [113.772, 99.3912, 0.240929],
+                       [113.772, 108.51, 16.5534], [113.775, 99.6067, 0.120465], [113.772, 99.3912, 0.240929],
+                       [113.772, 108.51, 16.5534], [113.775, 99.6067, 0.120465], [113.772, 99.3912, 0.240929],
+                       [113.772, 108.51, 16.5534], [113.775, 99.6067, 0.120465], [113.772, 99.3912, 0.240929],
+                       [113.772, 108.51, 16.5534], [113.775, 99.6067, 0.120465], [113.772, 99.3912, 0.240929],
+                       [113.772, 108.51, 16.5534], ])
+        labels = np.array([0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0])
+        category = 0
+        new_filename = "../data/ShapeNet/test/test_data_0.mat"
+        savemat(new_filename, {'points':randpoints,'labels':labels,'category':category})
+        os.system("python -W ignore test.py")
+        os.system("rm -r ../data/ShapeNet/test")
+        os.system("rm ../category_file")
+        os.system("mv ../data/ShapeNet/test_old ../data/ShapeNet/test")
+        os.system("mv ../category_file_old ../category_file")
+        
+    def test_2test_without_categoryfile(self):
+        os.system("mv ../data/ShapeNet/test ../data/ShapeNet/test_old")
+        os.system("mv ../category_file ../category_file_old")
+        os.system("mkdir ../data/ShapeNet/test")
+        randpoints = np.array([[113.772, 108.51, 16.5534], [113.775, 99.6067, 0.120465], [113.772, 99.3912, 0.240929],
+                       [113.772, 108.51, 16.5534], [113.775, 99.6067, 0.120465], [113.772, 99.3912, 0.240929],
+                       [113.772, 108.51, 16.5534], [113.775, 99.6067, 0.120465], [113.772, 99.3912, 0.240929],
+                       [113.772, 108.51, 16.5534], [113.775, 99.6067, 0.120465], [113.772, 99.3912, 0.240929],
+                       [113.772, 108.51, 16.5534], [113.775, 99.6067, 0.120465], [113.772, 99.3912, 0.240929],
+                       [113.772, 108.51, 16.5534], ])
+        labels = np.array([0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0])
+        category = 0
+        new_filename = "../data/ShapeNet/test/test_data_0.mat"
+        savemat(new_filename, {'points':randpoints,'labels':labels,'category':category})
+        os.system("python -W ignore test.py")
+        os.system("rm -r ../data/ShapeNet/test")
+        os.system("mv ../data/ShapeNet/test_old ../data/ShapeNet/test")
+        os.system("mv ../category_file_old ../category_file")
 
 
 if __name__ == '__main__':

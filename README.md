@@ -18,7 +18,7 @@ You may try to install prerequisites by following command: python setup.py insta
 However, we highly recommend you to build docker image from provided Dockerfile:
 <pre>
 docker build -f Dockerfile .
-docker run <image name>
+docker run < image name >
 </pre>
 
 Docker image will contain cloned repository.

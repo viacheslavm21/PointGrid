@@ -33,7 +33,17 @@ def get_file_name(file_path):
 
 TESTING_FILE_LIST = [get_file_name(file_name) for file_name in glob.glob('../data/ShapeNet/test/' + '*.mat')]
 
-category2name = ['Airplane', 'Bag', 'Cap', 'Car', 'Chair', 'Earphone', 'Guitar', 'Knife', 'Lamp', 'Laptop', 'Motorbike', 'Mug', 'Pistol', 'Rocket', 'Skateboard', 'Table']
+try:
+    outfile = open("../category_file", "r")
+    category2name = []
+    line = outfile.readline()
+    while line:
+        category2name.append(line[:-1])
+        line = outfile.readline()
+except:
+    category2name = []
+    
+# category2name = ['Airplane', 'Bag', 'Cap', 'Car', 'Chair', 'Earphone', 'Guitar', 'Knife', 'Lamp', 'Laptop', 'Motorbike', 'Mug', 'Pistol', 'Rocket', 'Skateboard', 'Table']
 
 color_map = json.load(open('part_color_mapping.json', 'r'))
 
@@ -173,7 +183,10 @@ def predict():
             avg_iou += iou
             cat_iou[category] += iou
             if (cat_obj[category] <= 3):
-                output_color_point_cloud(pc, pred_point_label, '../data/ShapeNet/test-PointGrid/' + category2name[category] + '_' + str(cat_obj[category]) + '.obj')
+                try:
+                    output_color_point_cloud(pc, pred_point_label, '../data/ShapeNet/test-PointGrid/' + category2name[category] + '_' + str(cat_obj[category]) + '.obj')
+                except:
+                    output_color_point_cloud(pc, pred_point_label, '../data/ShapeNet/test-PointGrid/' + str(category) + '_' + str(cat_obj[category]) + '.obj')
             printout(flog, '%d/%d %s' % ((loop+1), len(TESTING_FILE_LIST), TESTING_FILE_LIST[loop]))
             printout(flog, '----------')
 
@@ -185,7 +198,10 @@ def predict():
         for i in range(model.NUM_CATEGORY):
             cat_accuracy[i] /= float(cat_obj[i])
             cat_iou[i] /= float(cat_obj[i])
-            printout(flog, '\t%s (%d): %f, %f' % (category2name[i], cat_obj[i], cat_accuracy[i], cat_iou[i]))
+            try:
+                printout(flog, '\t%s (%d): %f, %f' % (category2name[i], cat_obj[i], cat_accuracy[i], cat_iou[i]))
+            except:
+                printout(flog, '\t%d (%d): %f, %f' % (i, cat_obj[i], cat_accuracy[i], cat_iou[i]))
 
 
 

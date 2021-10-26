@@ -1,0 +1,1 @@
+Namespace(batch=32, epoch=3, gpu=0, output_dir='train_results', wd=0)

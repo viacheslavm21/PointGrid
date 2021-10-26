@@ -45,6 +45,8 @@ def get_file_name(file_path):
 
 TRAINING_FILE_LIST = [get_file_name(file_name) for file_name in glob.glob('../data/ShapeNet/train/' + '*.mat')]
 
+print("len(TRAINING_FILE_LIST)",len(TRAINING_FILE_LIST))
+
 MODEL_STORAGE_PATH = os.path.join(output_dir, 'trained_models')
 if not os.path.exists(MODEL_STORAGE_PATH):
     os.mkdir(MODEL_STORAGE_PATH)

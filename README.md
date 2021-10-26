@@ -45,7 +45,8 @@ python /root/train.py
 python /root/test.py
 </pre>
 
-Run the scripts sequentially to reproduce the results.
+Run the scripts sequentially to reproduce the results. 
+Note: data preparation is a long process (a file in original dataset is triangular mesh, when the project needs pointclouds). Therefore, we prepared train and test data for you in the repo. You may either try download.sh + prepare.py. Or just start with train and test.
 
 ## Development 
 
@@ -72,3 +73,5 @@ If you find this code useful, please cite our work at <br />
 	year = {2018},
 }
 </pre>
+
+Original repo: https://github.com/trucleduc/PointGrid

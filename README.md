@@ -14,7 +14,11 @@ For cloning this repo to your machine use:
 git clone https://github.com/viacheslavm21/PointGrid.git
 </pre>
 
-You may try to install prerequisites by following command: python setup.py install, from /root/codes.
+You may try to install prerequisites by following command: (from /root/codes)
+<pre>
+python setup.py install
+</pre>
+
 However, we highly recommend you to build docker image from provided Dockerfile:
 <pre>
 docker build -f Dockerfile .
@@ -25,9 +29,21 @@ Docker image will contain cloned repository.
 
 The repo provides four entry-points.
 1. /root/download.sh - downloads ModelNet40 dataset and unzips it.
+<pre>
+bash /root/download.sh
+</pre>
 2. /root/prepare.py - sampling points from triangle mesh, saving in .mat format.
+<pre>
+python /root/prepare.py
+</pre>
 3. /root/code/train.py - train the network.
+<pre>
+python /root/train.py
+</pre>
 4. /root/code/test.py - testing and evaluation. 
+<pre>
+python /root/test.py
+</pre>
 
 Run the scripts sequentially to reproduce the results.
 

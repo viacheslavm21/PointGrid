@@ -2,16 +2,14 @@ ARG UBUNTU_VER=18.04
 ARG CONDA_VER=latest
 ARG OS_TYPE=x86_64
 ARG PY_VER=3.6
-ARG TF_VER=1.13
+ARG TF_VER=1.14
 
 FROM ubuntu:${UBUNTU_VER}
 
 # System packages 
-RUN apt-get update && apt-get install -yq curl wget jq vim
-RUN apt-get install unzip
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y git
+RUN apt-get update && apt-get upgrade -y
+RUN apt-get install -yq curl wget jq vim
+RUN apt-get install -y unzip git python3-pip
 
 # Use the above args during building https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
 ARG CONDA_VER
@@ -27,11 +25,14 @@ ARG PY_VER
 ARG TF_VER
 # Install packages from conda and downgrade py (optional).
 RUN conda install -c anaconda -y python=${PY_VER}
-RUN conda install -c anaconda -y \
-    tensorflow-mkl=${TF_VER} \
-    && pip install numpy pandas scipy
+RUN pip install numpy pandas scipy
+RUN conda install -c anaconda -y tensorflow-mkl=${TF_VER}
 
-RUN mkdir /PointGrid
-WORKDIR /PointGrid
+RUN pip uninstall -y tensorflow
+RUN pip install tensorflow==1.13.2
+
+WORKDIR /
 RUN git clone https://github.com/viacheslavm21/PointGrid.git
 
+WORKDIR /PointGrid
+RUN chmod +x download.sh

@@ -14,7 +14,7 @@ import tf_util
 
 N = 16 # grid size is N x N x N
 K = 4 # each cell has K points
-NUM_CATEGORY = 16
+NUM_CATEGORY = 40
 NUM_SEG_PART = 50+1
 NUM_PER_POINT_FEATURES = 3
 NUM_FEATURES = K * NUM_PER_POINT_FEATURES + 1
@@ -33,7 +33,7 @@ def integer_label_to_one_hot_label(integer_label):
     elif (len(integer_label.shape) == 1):
         one_hot_label = np.zeros((integer_label.shape[0], NUM_SEG_PART))
         for i in range(integer_label.shape[0]):
-            one_hot_label[i, integer_label[i]] = 1
+            one_hot_label[i, int(integer_label[i])] = 1
     elif (len(integer_label.shape) == 4):
         one_hot_label = np.zeros((N, N, N, K, NUM_SEG_PART))
         for i in range(N):
@@ -191,7 +191,7 @@ def get_model(pointgrid, is_training):
     pred_cat = tf_util.fully_connected(do2, NUM_CATEGORY, activation_fn=None, bn=False, scope='pred_cat')
 
     # Segmentation Network
-    cat_features = tf.tile(tf.reshape(tf.concat([fc2, pred_cat], axis=1), [batch_size, 1, 1, 1, -1]), [1, N/16, N/16, N/16, 1])
+    cat_features = tf.tile(tf.reshape(tf.concat([fc2, pred_cat], axis=1), [batch_size, 1, 1, 1, -1]), [1, N//16, N//16, N//16, 1])
     conv9_cat = tf.concat([conv9, cat_features], axis=4)
     deconv1 = tf_util.conv3d_transpose(conv9_cat, 256, [3,3,3], scope='deconv1', activation_fn=leak_relu, bn=True, is_training=is_training, stride=[2,2,2], padding='SAME') # N/8
     conv7_deconv1 = tf.concat(axis=4, values=[conv7, deconv1])

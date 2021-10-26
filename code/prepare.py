@@ -5,6 +5,9 @@ from scipy.io import savemat, loadmat
 from zipfile import ZipFile
 from os.path import basename
 
+FOLDERS_TO_PREPARE = 5  #It will NOT convert full ModelNet40 dataset. Only given number of folders. However, network will not change its N_CATEGORIES parameter
+                        #To convert all dataset set = 40
+
 def zipdata(dirName = '/content/drive/MyDrive/ModelNetMatFiles'):
   with ZipFile('/content/drive/MyDrive/datasetclear.zip', 'w') as zipObj:
     for folderName, subfolders, filenames in os.walk(dirName):
@@ -106,7 +109,7 @@ f = []
 I = 0
 short_filenames = []
 for (dirpath, dirnames, filenames) in os.walk("./ModelNet40"):
-    if I == 5:
+    if I == FOLDERS_TO_PREPARE+1:
       break
     fullpath = [os.path.join(dirpath,f) for f in filenames]
     f.append(fullpath)

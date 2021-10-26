@@ -9,8 +9,12 @@
 	- 'category': scalar (0-based integer model category)
 
 ## Quickstart
+git clone https://github.com/viacheslavm21/PointGrid.git
+
 You may try to install prerequisites by following command: python setup.py install, from /root/codes.
 However, we highly recommend you to build docker image from provided Dockerfile.
+
+Docker image will contain cloned repository.
 
 The repo provides four entry-points.
 1. /root/download.sh - downloads ModelNet40 dataset and unzips it.

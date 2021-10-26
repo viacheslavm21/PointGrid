@@ -37,6 +37,8 @@ python -W ignore -m unittest test_pointgrid.py -v
 </pre>
 In this command warnings are disabled as in the project the old packets are used.
 
+## Original article 
+
 If you find this code useful, please cite our work at <br />
 <pre>
 @article{PointGrid,

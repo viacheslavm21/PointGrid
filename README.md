@@ -28,6 +28,14 @@ Run the scripts sequentially to reproduce the results.
 
 In network.py change NUM_CATEGORY from 40 to n, where n is the number of categories in your dataset (if you want to try another dataset)
 
+## Run tests
+
+In test_pointgrid.py there are unittests for modules from network.py and for train and test from code directory. You can run all tests with command:
+<pre>
+cd code
+python -W ignore -m unittest test_pointgrid.py -v
+</pre>
+In this command warnings are disabled as in the project the old packets are used.
 
 If you find this code useful, please cite our work at <br />
 <pre>

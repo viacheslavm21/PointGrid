@@ -1,0 +1,43 @@
+absl-py @ file:///tmp/build/80754af9/absl-py_1600297512717/work
+astor==0.8.1
+brotlipy==0.7.0
+certifi==2020.6.20
+cffi @ file:///tmp/build/80754af9/cffi_1600699165083/work
+charset-normalizer @ file:///tmp/build/80754af9/charset-normalizer_1630003229654/work
+conda==4.10.3
+conda-package-handling @ file:///tmp/build/80754af9/conda-package-handling_1603018143336/work
+cryptography @ file:///tmp/build/80754af9/cryptography_1601047419573/work
+gast @ file:///tmp/build/80754af9/gast_1597433534803/work
+google-pasta==0.2.0
+grpcio @ file:///tmp/build/80754af9/grpcio_1597424460877/work
+h5py @ file:///tmp/build/80754af9/h5py_1593454121459/work
+idna @ file:///tmp/build/80754af9/idna_1622654382723/work
+importlib-metadata @ file:///tmp/build/80754af9/importlib-metadata_1602276842396/work
+Keras-Applications @ file:///tmp/build/80754af9/keras-applications_1594366238411/work
+Keras-Preprocessing==1.1.0
+Markdown @ file:///tmp/build/80754af9/markdown_1603216459557/work
+mkl-fft==1.2.0
+mkl-random==1.1.0
+mkl-service==2.3.0
+numpy @ file:///tmp/build/80754af9/numpy_and_numpy_base_1596233737064/work
+pandas==1.1.5
+protobuf==3.13.0
+pycosat==0.6.3
+pycparser @ file:///tmp/build/80754af9/pycparser_1594388511720/work
+pyOpenSSL @ file:///tmp/build/80754af9/pyopenssl_1608057966937/work
+PySocks==1.7.1
+python-dateutil==2.8.2
+pytz==2021.3
+requests @ file:///tmp/build/80754af9/requests_1629994808627/work
+ruamel-yaml==0.15.87
+scipy @ file:///tmp/build/80754af9/scipy_1597686625380/work
+six @ file:///tmp/build/80754af9/six_1623709665295/work
+tensorboard==1.14.0
+tensorflow==1.14.0
+tensorflow-estimator==1.14.0
+termcolor==1.1.0
+tqdm @ file:///tmp/build/80754af9/tqdm_1631818572807/work
+urllib3==1.26.7
+Werkzeug==1.0.1
+wrapt==1.12.1
+zipp @ file:///tmp/build/80754af9/zipp_1603306325174/work

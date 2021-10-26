@@ -9,10 +9,17 @@
 	- 'category': scalar (0-based integer model category)
 
 ## Quickstart
+For cloning this repo to your machine use:
+<pre>
 git clone https://github.com/viacheslavm21/PointGrid.git
+</pre>
 
 You may try to install prerequisites by following command: python setup.py install, from /root/codes.
-However, we highly recommend you to build docker image from provided Dockerfile.
+However, we highly recommend you to build docker image from provided Dockerfile:
+<pre>
+docker build -f Dockerfile .
+docker run <image name>
+</pre>
 
 Docker image will contain cloned repository.
 

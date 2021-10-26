@@ -6,6 +6,7 @@ import numpy as np
 from network import *
 import tensorflow as tf
 import os
+from scipy.io import savemat
 
 class TestNetwork(unittest.TestCase):
 
@@ -34,16 +35,28 @@ class TestNetwork(unittest.TestCase):
 
 class TestTrain(unittest.TestCase):
     
-    def test_train(self):
-
-        os.system("python -W ignore train.py --epoch 2 --batch 32") 
-
+    def test_train_one_epoch_one_file(self):
+        os.system("mv ../data/ShapeNet/train ../data/ShapeNet/train_old")
+        os.system("mkdir ../data/ShapeNet/train")
+        randpoints = np.array([[113.772, 108.51, 16.5534], [113.775, 99.6067, 0.120465], [113.772, 99.3912, 0.240929],
+                       [113.772, 108.51, 16.5534], [113.775, 99.6067, 0.120465], [113.772, 99.3912, 0.240929],
+                       [113.772, 108.51, 16.5534], [113.775, 99.6067, 0.120465], [113.772, 99.3912, 0.240929],
+                       [113.772, 108.51, 16.5534], [113.775, 99.6067, 0.120465], [113.772, 99.3912, 0.240929],
+                       [113.772, 108.51, 16.5534], [113.775, 99.6067, 0.120465], [113.772, 99.3912, 0.240929],
+                       [113.772, 108.51, 16.5534], ])
+        labels = np.array([0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0])
+        category = 0
+        new_filename = "../data/ShapeNet/train/train_data_0.mat"
+        savemat(new_filename, {'points':randpoints,'labels':labels,'category':category})
+        os.system("python -W ignore train.py --epoch 1 --batch 1")
+        os.system("rm -r ../data/ShapeNet/train")
+        os.system("mv ../data/ShapeNet/train_old ../data/ShapeNet/train")
         
-class TestTest(unittest.TestCase):
+# class TestTest(unittest.TestCase):
     
-    def test_test(self):
+#     def test_test(self):
 
-        os.system("python -W ignore test.py") 
+#         os.system("python -W ignore test.py") 
 
 
 if __name__ == '__main__':

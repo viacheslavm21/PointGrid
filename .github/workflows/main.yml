@@ -1,4 +1,4 @@
-on: [push]
+on: [workflow_dispatch]
 
 jobs:
   run_container:
@@ -10,67 +10,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Download data
-      run: ./code/download.sh
-#     - name: List files
-#       run: |
-#         ls /
-#         ls ./
-#         pwd
-
-#     - name: What OS is running
-#       run: uname -a
-#     - name: What java version do we have
-#       run: java -version
-
-#     name: DOCKERFILE MOTHERF*CKER
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v2
-#       - name: Hello world action step
-#         # id: hello
-#         uses: ogoldobina/PointGrid@master
-
-#         with:
-#           who-to-greet: 'Mona the Octocat'
-
-#     container:
-#       image: 'Dockerfile'
-#     steps:
-#     - uses: actions/checkout@v2
-#       name: Checkout
-#     - name: What OS is running
-#       run: uname -a
-#     - name: What java version do we have
-#       run: java -version
-
-#       - name: Hello world action step
-#         id: hello
-#         uses: ogoldobina/PointGrid@master
-#         with:
-#           who-to-greet: 'Mona the Octocat'
-#       # Use the output from the `hello` step
-#       - name: Get the output time
-#         run: echo "The time was ${{ steps.hello.outputs.time }}"
-#       - name: Some new action
-#         uses: ogoldobina/PointGrid/actions/action_01/@master 
-
-# on:
-#   push
-# jobs:
-#   building:
-#     name: Checkouts
-#     runs-on: [self-hosted]
-#     steps:
-#       -
-#         name: Pull the repository
-#         uses: actions/checkout@v2
-#       -
-#         run: ls
-#       -
-#         run: docker build -t idle_image .
-#       -
-#         run: docker images
-#       -
-#         run: docker run --rm -t -v /datas:/data idle_image
-#       -
-#         run: date > dates.log
+      run: |
+        chmod +x ./download.sh
+        ./download.sh
+    - name: Prepare data
+      run: python ./prepare.py
+    - name: Train model
+      run: python ./code/train.py
+    - name: Test model
+      run: python ./code/test.py

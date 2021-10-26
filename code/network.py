@@ -42,7 +42,7 @@ def integer_label_to_one_hot_label(integer_label):
               for l in range(K):
                 one_hot_label[i, j, k, l, integer_label[i, j, k, l]] = 1
     else:
-        raise
+        raise AssertionError
     return one_hot_label
 
 

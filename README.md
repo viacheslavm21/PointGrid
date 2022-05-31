@@ -1,5 +1,8 @@
 # PointGrid: A Deep Network for 3D Shape Understanding
 
+## Importnant note:
+This project is an engineering improvement to the original PointGrid software: https://github.com/trucleduc/PointGrid
+
 ## Prerequisites:
 ### Requirements
 1. Python 3.6.12 (with necessary common libraries such as numpy, scipy, etc.)
